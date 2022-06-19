@@ -1,5 +1,5 @@
-import { Body, Controller, Get, Head, Header, HttpCode, Post, Query, Redirect, Req } from '@nestjs/common';
-import { Request } from 'express';
+import { Body, Controller, Get, Head, Header, HttpCode, HttpStatus, Post, Query, Redirect, Req, Res } from '@nestjs/common';
+import { Request, Response, response } from 'express';
 import { version } from 'os';
 import { CreateCatDTO } from 'src/DTO/create-cat.dto';
 
@@ -7,8 +7,8 @@ import { CreateCatDTO } from 'src/DTO/create-cat.dto';
 export class CatsController {
     @Get('cats')
     findAll():string { return 'This action returns all cats '}
-    findAllWithReq (@Req() request:Request):string {
-        return 'This action returns all catsWith a req';
+    findAllWithReq (@Req() request:Request , @Res() response:Response){
+        response.status(HttpStatus.OK).json([]);
     }
 
     // Redirect 
@@ -35,5 +35,6 @@ export class CatsController {
     async createNewMeow(@Body() createCatDto:CreateCatDTO){
         return 'This  action adds a new Cat'; 
     }
+
 }
 
