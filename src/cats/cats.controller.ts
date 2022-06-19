@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Head, Header, HttpCode, HttpStatus, Post, Query, Redirect, Req, Res } from '@nestjs/common';
 import { Request, Response, response } from 'express';
 import { version } from 'os';
-import { CreateCatDTO } from 'src/DTO/create-cat.dto';
+import { CreateCatDTO } from 'src/cats/DTO/create-cat.dto';
 import { CatsService } from './cats.service';
 import { Cat } from './interfaces/cat.interface';
 
