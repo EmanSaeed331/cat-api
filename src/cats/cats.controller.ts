@@ -2,9 +2,12 @@ import { Body, Controller, Get, Head, Header, HttpCode, HttpStatus, Post, Query,
 import { Request, Response, response } from 'express';
 import { version } from 'os';
 import { CreateCatDTO } from 'src/DTO/create-cat.dto';
+import { CatsService } from './cats.service';
+import { Cat } from './interfaces/cat.interface';
 
 @Controller('cats' )
 export class CatsController {
+    constructor(private catsService:CatsService) {} // inject the constructor with catServices 
     @Get('cats')
     findAll():string { return 'This action returns all cats '}
     findAllWithReq (@Req() request:Request , @Res() response:Response){
@@ -35,6 +38,18 @@ export class CatsController {
     async createNewMeow(@Body() createCatDto:CreateCatDTO){
         return 'This  action adds a new Cat'; 
     }
-
+    
+    // By using of Cat.Services 
+    @Post('/createWithNewService')
+    async createNewMeoow(@Body () createCatDto:CreateCatDTO)
+    {
+        this.catsService.create(createCatDto)
+    }
+    @Get ('GetWithNewService')
+    //  Promise<Cat[]>  is a generic type 
+    async findAllCats(): Promise<Cat[]>
+    {
+        return this.catsService.findAll();
+    }
 }
 
