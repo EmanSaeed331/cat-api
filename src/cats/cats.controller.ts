@@ -1,10 +1,12 @@
-import { Body, Controller, Get, Head, Header, HttpCode, HttpStatus, Post, Query, Redirect, Req, Res } from '@nestjs/common';
+import { Body, Controller, Get, Head, Header, HttpCode, HttpStatus, Post, Query, Redirect, Req, Res, UsePipes } from '@nestjs/common';
 import { Request, Response, response } from 'express';
 import { version } from 'os';
 import { CreateCatDTO } from 'src/cats/DTO/create-cat.dto';
 import { CatsService } from './cats.service';
 import { ForbiddenException } from './Exceptions/forbidden.exception';
 import { Cat } from './interfaces/cat.interface';
+import { createCatSchema } from './Schemas/cat.Schema';
+import { JoiValidationPipe } from './Validation/Validation';
 
 @Controller('cats' )
 export class CatsController {
@@ -60,6 +62,7 @@ export class CatsController {
         throw new ForbiddenException();
     }
     @Post('/createCatProfile')
+   // @UsePipes(new JoiValidationPipe(createCatSchema))
     async createCat(@Body() createCatDto:CreateCatDTO)
     {
         this.catsService.create(createCatDto)
