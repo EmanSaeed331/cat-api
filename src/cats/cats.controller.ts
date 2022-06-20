@@ -59,5 +59,10 @@ export class CatsController {
     async FindAllCats() {
         throw new ForbiddenException();
     }
+    @Post('/createCatProfile')
+    async createCat(@Body() createCatDto:CreateCatDTO)
+    {
+        this.catsService.create(createCatDto)
+    }
 }
 
