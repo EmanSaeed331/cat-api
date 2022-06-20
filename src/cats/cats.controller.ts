@@ -3,6 +3,7 @@ import { Request, Response, response } from 'express';
 import { version } from 'os';
 import { CreateCatDTO } from 'src/cats/DTO/create-cat.dto';
 import { CatsService } from './cats.service';
+import { ForbiddenException } from './Exceptions/forbidden.exception';
 import { Cat } from './interfaces/cat.interface';
 
 @Controller('cats' )
@@ -50,6 +51,13 @@ export class CatsController {
     async findAllCats(): Promise<Cat[]>
     {
         return this.catsService.findAll();
+    }
+
+    // Forbidden for specific route 
+
+    @Get('/GetAllCats')
+    async FindAllCats() {
+        throw new ForbiddenException();
     }
 }
 
