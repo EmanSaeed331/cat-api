@@ -31,7 +31,10 @@
 ```bash
 $ npm install
 ```
-
+## documentation|Swagger
+```
+http://localhost:3000/api/#/
+```
 ## Running the app
 
 ```bash
